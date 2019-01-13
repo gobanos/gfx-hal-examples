@@ -1,0 +1,16 @@
+[package]
+name = "basic-window"
+version = "0.1.0"
+authors = ["Grégory Obanos <gregory.obanos@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+gfx-hal = "0.1.0"
+gfx-backend-vulkan = "0.1.0"
+glsl-to-spirv = "0.1.4"
+winit = "0.18.0"
+env_logger = "0.5"
+log = "0.4"
+image = "0.19"
+nalgebra = "0.16.13"
+num-traits = "0.2.6"
