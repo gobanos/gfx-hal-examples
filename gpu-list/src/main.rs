@@ -17,9 +17,9 @@ extern crate gfx_backend_metal as back;
 #[cfg(feature = "vulkan")]
 extern crate gfx_backend_vulkan as back;
 
-use gfx_hal::Instance;
 #[cfg(feature = "gl")]
 use gfx_hal::format::AsFormat;
+use gfx_hal::Instance;
 
 #[cfg(any(
     feature = "vulkan",
@@ -39,16 +39,16 @@ fn main() {
         let events_loop = winit::EventsLoop::new();
 
         let wb = winit::WindowBuilder::new()
-            .with_dimensions(winit::dpi::LogicalSize::new(
-                1920.0,
-                1080.0,
-            ))
+            .with_dimensions(winit::dpi::LogicalSize::new(1920.0, 1080.0))
             .with_title("gpu-list".to_string());
 
         let window = {
-            let builder =
-                back::config_context(back::glutin::ContextBuilder::new(), gfx_hal::format::Rgba8Srgb::SELF, None)
-                    .with_vsync(true);
+            let builder = back::config_context(
+                back::glutin::ContextBuilder::new(),
+                gfx_hal::format::Rgba8Srgb::SELF,
+                None,
+            )
+            .with_vsync(true);
             back::glutin::GlWindow::new(wb, builder, &events_loop).unwrap()
         };
 
@@ -57,8 +57,14 @@ fn main() {
         (adapters, surface)
     };
 
+    println!("{} adapter(s) found: ", adapters.len());
+
     for adapter in &adapters {
-        println!("{:?}", adapter.info);
+        let info = &adapter.info;
+        println!("\n{}", info.name);
+        println!("  - vendor: {:04x}", info.vendor);
+        println!("  - device: {:04x}", info.device);
+        println!("  - device_type: {:?}", info.device_type);
     }
 }
 
