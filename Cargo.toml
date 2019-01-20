@@ -2,5 +2,6 @@
 
 members = [
     "basic-window",
-    "quad"
+    "quad",
+    "gpu-list",
 ]
